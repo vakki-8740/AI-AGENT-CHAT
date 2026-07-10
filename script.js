@@ -1,6 +1,6 @@
 // ===================== HARDCODED CONFIG =====================
 const ENDPOINT = '/api/chat';
-const MODEL = 'qwen/qwen3-next-80b-a3b-instruct:free';
+const MODEL = 'tencent/hy3:free';
 const SYSTEM_INSTRUCTIONS = `You are a helpful support assistant. Be polite, patient, and professional. Ask clarifying questions to understand the user's issue. Guide them step by step. Do not ask for sensitive information like passwords or OTPs. If you cannot resolve the issue, suggest they contact human support.`;
 
 const PROBLEM_PROMPTS = {

@@ -1,7 +1,5 @@
 // ===================== HARDCODED CONFIG =====================
-// Edit these values directly:
-const API_KEY = 'YOUR_OPENROUTER_API_KEY_HERE';
-const ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
+const ENDPOINT = '/api/chat';
 const MODEL = 'qwen/qwen3-next-80b-a3b-instruct:free';
 const SYSTEM_INSTRUCTIONS = `You are a helpful support assistant. Be polite, patient, and professional. Ask clarifying questions to understand the user's issue. Guide them step by step. Do not ask for sensitive information like passwords or OTPs. If you cannot resolve the issue, suggest they contact human support.`;
 
@@ -134,11 +132,6 @@ function clearChat() {
 
 // ===================== AI CALL =====================
 async function getAIResponse() {
-    if (!API_KEY || API_KEY === 'sk-or-v1-your-openrouter-key-here') {
-        addMessage('ai', '⚠️ API key not set. Open script.js and replace `API_KEY` with your actual OpenRouter key.');
-        return;
-    }
-
     addTypingIndicator();
 
     const body = {
@@ -151,10 +144,7 @@ async function getAIResponse() {
     try {
         const res = await fetch(ENDPOINT, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${API_KEY}`
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
         });
 

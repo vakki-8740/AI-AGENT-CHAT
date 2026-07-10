@@ -1,4 +1,5 @@
-// ===================== HARDCODED CONFIG =====================
+// ===================== CONFIG =====================
+// OpenRouter config - API key comes from Vercel serverless function (api/chat.js)
 const ENDPOINT = '/api/chat';
 const MODEL = 'tencent/hy3:free';
 const SYSTEM_INSTRUCTIONS = `You are a helpful support assistant. Be polite, patient, and professional. Ask clarifying questions to understand the user's issue. Guide them step by step. Do not ask for sensitive information like passwords or OTPs. If you cannot resolve the issue, suggest they contact human support.`;
@@ -152,11 +153,15 @@ async function getAIResponse() {
 
         if (!res.ok) {
             const errData = await res.text();
-            let msg = `API Error ${res.status}`;
-            try {
-                const j = JSON.parse(errData);
-                msg = j.error?.message || msg;
-            } catch (_) {}
+            let msg = `Error ${res.status}`;
+            if (res.status === 404) {
+                msg = 'API endpoint not found. Make sure you have deployed the latest code with the api/chat.js function, and OPENROUTER_API_KEY is set in Vercel environment variables.';
+            } else {
+                try {
+                    const j = JSON.parse(errData);
+                    msg = j.error?.message || msg;
+                } catch (_) {}
+            }
             throw new Error(msg);
         }
 

@@ -28,7 +28,7 @@ export default async function handler(req, res) {
                 'X-Title': 'AI Support Hub'
             },
             body: JSON.stringify({
-                model: model || 'qwen/qwen3-next-80b-a3b-instruct:free',
+                model: model || 'tencent/hy3:free',
                 messages,
                 temperature: temperature ?? 0.7,
                 max_tokens: max_tokens ?? 1024
